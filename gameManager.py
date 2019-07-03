@@ -14,18 +14,18 @@ class GameManager():
         self._players = players
         self._active_player = 0 # the index of the active player
 
-    def run_turn(self):
+    def start_turn(self, player, option):
         '''
         runs the next turn of the game
         assumes it is _active_player's turn
         '''
         # SETUP VARS
-        player, player_manager = self._players[self._active_player]
+        aplayer, aplayer_manager = self._players[self._active_player]
+        assert player == aplayer, "It is not "+str(player)+"'s turn." # this might be too bossy
         # START TURN
-        player.start_turn()
-        player_manager.start_turn()
-        # FIGURE OUT WHAT THE PLAYER IS DOING WITH THEIR TURN
-        turn_action = player.get_turn_choice()
+        aplayer.start_turn()
+        aplayer_manager.start_turn()
+        # 
 
     def next_turn(self):
         '''
