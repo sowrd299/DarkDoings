@@ -47,7 +47,7 @@ class GameManager():
         # Return the options for what to do with a turn
         return Choice([self.STUDY_TURN, self.PLAN_TURN, self.INVESTIGATE_TURN, self.MOTION_TURN])
 
-    def set_turn_option(self, player_ind : int, option : TurnOption):
+    def set_turn_option(self, player_ind : int, option : TurnOption) -> [Choice]:
         '''
         Set the kind of turn we are currently in
         The second thing to be called every turn
@@ -74,6 +74,13 @@ class GameManager():
                 self._players[player_ind].draw_to_resource(c)
 
     # OTHER MANAGEMENT FUNCTIONS
+    def game_ongoing(self):
+        '''
+        returns if the game is still ongoing
+        or if it has endeded
+        '''
+        return True
+
     def next_turn(self):
         '''
         progresses to the next turn of the game
@@ -82,4 +89,7 @@ class GameManager():
         self._active_player %= len(self._players)
 
     def get_active_player_ind(self):
+        '''
+        returns the index of the current active player
+        '''
         return self._active_player
