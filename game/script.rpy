@@ -1,33 +1,41 @@
 ﻿# The script of the game goes in this file.
 
+init python:
+
+    from gameManager import GameManager
+
+    # variables
+    players = []
+    player_managers = [] # TODO: setup player managers
+    gm = GameManager(players)
+
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
+define v = Character("The Voice in Side Your Head")
 
 
 # The game starts here.
-
 label start:
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    v "So here we begin...."
+    v "{i} MUA HA HA HA HA {/i}"
 
-    scene bg room
+    menu:
 
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
-
-    show eileen happy
-
-    # These display lines of dialogue.
-
-    e "You've created a new Ren'Py game."
-
-    e "Once you add a story, pictures, and music, you can release it to the world!"
-
-    # This ends the game.
+        "Let's play":
+            jump start_turn
 
     return
+
+# GAME LOGIC
+label start_turn:
+
+    python:
+        # decide the active player
+        active_player_ind = gm.get_active_player_ind()
+        active_player = player_managers[active_player_ind]
+        # choice type of turn
+        turn_options = start_turn(active_player_ind)
+
+    v "What shall we do with our turn...?"
